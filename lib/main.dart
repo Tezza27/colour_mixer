@@ -1,4 +1,5 @@
 import 'package:colour_mixer/provider/colour.dart';
+import 'package:colour_mixer/views/proof.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      routes: {
+        Proof.routeName: (context) => Proof(),
+      },
       home: MyHomePage(title: 'Colour Mixer'),
     );
   }
@@ -254,6 +258,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
+                ),
+                RaisedButton(
+                  color: Color.fromRGBO(
+                      255 - redValue, 255 - greenValue, 255 - blueValue, 1),
+                  child: Text("Go To Proof"),
+                  onPressed: () {
+                    Navigator.pushNamed(context, Proof.routeName);
+                  },
                 ),
               ],
             ),
