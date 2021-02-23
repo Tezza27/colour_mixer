@@ -1,5 +1,7 @@
+import 'package:colour_mixer/models/slidermodel.dart';
 import 'package:colour_mixer/provider/colour.dart';
 import 'package:colour_mixer/views/proof.dart';
+import 'package:colour_mixer/widgets/myslider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,66 +42,10 @@ class Mixer extends StatelessWidget {
                     color: Color.fromRGBO(255, 255, 255, 1.0),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Slider(
-                            min: 0.0,
-                            max: 255.0,
-                            divisions: 255,
-                            value: colour.redValue.toDouble(),
-                            activeColor: Colors.red[900],
-                            inactiveColor: Colors.red[500],
-                            onChanged: (newValueRed) {
-                              colour.newRedValue = newValueRed.toInt();
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Slider(
-                            min: 0.0,
-                            max: 255.0,
-                            divisions: 255,
-                            value: colour.greenValue.toDouble(),
-                            activeColor: Colors.green[900],
-                            inactiveColor: Colors.green[500],
-                            onChanged: (newValueGreen) {
-                              colour.newGreenValue = newValueGreen.toInt();
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Slider(
-                            min: 0.0,
-                            max: 255.0,
-                            divisions: 255,
-                            value: colour.blueValue.toDouble(),
-                            activeColor: Colors.blue[900],
-                            inactiveColor: Colors.blue[500],
-                            onChanged: (newValueBlue) {
-                              colour.newBlueValue = newValueBlue.toInt();
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 8.0),
-                          child: Slider(
-                            min: 0.0,
-                            max: 100.0,
-                            divisions: 100,
-                            value: colour.opacityValue,
-                            activeColor: Colors.black,
-                            inactiveColor: Colors.grey[500],
-                            onChanged: (newValueOpacity) {
-                              colour.newOpacityValue = newValueOpacity;
-                            },
-                          ),
-                        ),
+                        mySlider(slidersList[0], redValue, context),
+                        mySlider(slidersList[1], greenValue, context),
+                        mySlider(slidersList[2], blueValue, context),
+                        mySlider(slidersList[3], opacityValue.toInt(), context),
                       ],
                     ),
                   ),
@@ -185,7 +131,7 @@ class Mixer extends StatelessWidget {
                               SizedBox(
                                 width: 12.0,
                               ),
-                              Text("${opacityValue.toInt()}%",
+                              Text("${(opacityValue * 100).round()}%",
                                   style: TextStyle(
                                     fontSize: 18,
                                   )),
