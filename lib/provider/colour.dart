@@ -12,7 +12,7 @@ class Colour with ChangeNotifier {
   int _redValue = 125;
   int _greenValue = 125;
   int _blueValue = 125;
-  double _opacityValue = 1.0;
+  int _opacityValue = 255;
 
   int get redValue => _redValue;
 
@@ -20,7 +20,12 @@ class Colour with ChangeNotifier {
 
   int get blueValue => _blueValue;
 
-  double get opacityValue => _opacityValue;
+  int get opacityValue => _opacityValue;
+
+  set newOpacityValue(int newOpacity) {
+    _opacityValue = newOpacity;
+    notifyListeners();
+  }
 
   set newRedValue(int newRed) {
     _redValue = newRed;
@@ -34,11 +39,6 @@ class Colour with ChangeNotifier {
 
   set newBlueValue(int newBlue) {
     _blueValue = newBlue;
-    notifyListeners();
-  }
-
-  set newOpacityValue(double newOpacity) {
-    _opacityValue = newOpacity;
     notifyListeners();
   }
 }

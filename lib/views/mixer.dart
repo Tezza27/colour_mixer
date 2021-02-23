@@ -1,6 +1,8 @@
 import 'package:colour_mixer/models/slidermodel.dart';
 import 'package:colour_mixer/provider/colour.dart';
 import 'package:colour_mixer/views/proof.dart';
+import 'package:colour_mixer/widgets/mixdisplay.dart';
+import 'package:colour_mixer/widgets/mybutton.dart';
 import 'package:colour_mixer/widgets/myslider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,9 +15,9 @@ class Mixer extends StatelessWidget {
     int redValue = colour.redValue;
     int greenValue = colour.greenValue;
     int blueValue = colour.blueValue;
-    double opacityValue = colour.opacityValue;
+    int opacityValue = colour.opacityValue;
     Color backgroundColour =
-        Color.fromRGBO(redValue, greenValue, blueValue, opacityValue);
+        Color.fromARGB(opacityValue, redValue, greenValue, blueValue);
     return Scaffold(
       appBar: AppBar(
         title: Text("Colour mixer"),
@@ -45,7 +47,7 @@ class Mixer extends StatelessWidget {
                         mySlider(slidersList[0], redValue, context),
                         mySlider(slidersList[1], greenValue, context),
                         mySlider(slidersList[2], blueValue, context),
-                        mySlider(slidersList[3], opacityValue.toInt(), context),
+                        mySlider(slidersList[3], opacityValue, context),
                       ],
                     ),
                   ),
@@ -58,98 +60,22 @@ class Mixer extends StatelessWidget {
                     color: Color.fromRGBO(255, 255, 255, 1.0),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("RED",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              Text("$redValue",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("GREEN",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              Text("$greenValue",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("BLUE",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              Text("$blueValue",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 8.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text("OPACITY",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              Text("${(opacityValue * 100).round()}%",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                  )),
-                            ],
-                          ),
-                        ),
+                        mixDisplay("RED:", redValue.toString()),
+                        mixDisplay("GREEN:", greenValue.toString()),
+                        mixDisplay("BLUE:", blueValue.toString()),
+                        mixDisplay("OPACITY:",
+                            "${(opacityValue == 0 ? 0 : opacityValue / 255 * 100).round().toString()}%"),
                       ],
                     ),
                   ),
                 ),
-                RaisedButton(
-                  color: Color.fromRGBO(
-                      255 - redValue, 255 - greenValue, 255 - blueValue, 1),
-                  child: Text("Go To Proof"),
-                  onPressed: () {
-                    Navigator.pushNamed(context, Proof.routeName);
-                  },
-                ),
+                myButton(
+                    redVal: redValue,
+                    blueVal: blueValue,
+                    greenVal: greenValue,
+                    buttonText: "Go To Proof",
+                    context: context,
+                    routeName: Proof.routeName),
               ],
             ),
           ),

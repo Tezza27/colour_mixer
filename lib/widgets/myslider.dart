@@ -18,6 +18,9 @@ Widget mySlider(
       inactiveColor: sliderModel.inactiveColor,
       onChanged: (newValue) {
         switch (sliderModel.name) {
+          case "opacity":
+            colour.newOpacityValue = newValue.toInt();
+            break;
           case "red":
             colour.newRedValue = newValue.toInt();
             break;
@@ -26,9 +29,6 @@ Widget mySlider(
             break;
           case "blue":
             colour.newBlueValue = newValue.toInt();
-            break;
-          case "opacity":
-            colour.newOpacityValue = newValue;
             break;
         }
       },

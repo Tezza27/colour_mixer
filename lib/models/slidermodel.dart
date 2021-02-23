@@ -48,9 +48,9 @@ List<SliderModel> slidersList = [
   SliderModel(
     name: "opacity",
     min: 0.0,
-    max: 1.0,
-    divisions: 100,
+    max: 255.0,
+    divisions: 255,
     activeColor: Colors.black,
-    inactiveColor: Colors.white,
+    inactiveColor: Colors.grey[200],
   ),
 ];
