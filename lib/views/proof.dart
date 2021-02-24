@@ -23,13 +23,13 @@ class Proof extends StatelessWidget {
           children: <Widget>[
             proofDisplay(
                 cardColor: Colors.red,
-                textValue: "RED: $colorUtility.backgroundColor.red"),
+                textValue: "RED: ${(colorUtility.backgroundColor.red)}"),
             proofDisplay(
                 cardColor: Colors.green,
-                textValue: "GREEN: $colorUtility.backgroundColor.green"),
+                textValue: "GREEN: ${(colorUtility.backgroundColor.green)}"),
             proofDisplay(
                 cardColor: Colors.blue,
-                textValue: "BLUE: $colorUtility.backgroundColor.blue"),
+                textValue: "BLUE: ${(colorUtility.backgroundColor.blue)}"),
             proofDisplay(
                 cardColor: Colors.white,
                 textValue:
