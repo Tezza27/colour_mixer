@@ -11,21 +11,15 @@ class Mixer extends StatelessWidget {
   static const String routeName = '/mixer';
   @override
   Widget build(BuildContext context) {
-    final colour = Provider.of<Colour>(context);
-    int redValue = colour.redValue;
-    int greenValue = colour.greenValue;
-    int blueValue = colour.blueValue;
-    int opacityValue = colour.opacityValue;
-    Color backgroundColour =
-        Color.fromARGB(opacityValue, redValue, greenValue, blueValue);
+    final colorUtility = Provider.of<ColorUtility>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Colour mixer"),
       ),
       body: Container(
-        color: backgroundColour,
+        color: colorUtility.getBackgroundColor(),
         child: Center(
-          child: Consumer<Colour>(
+          child: Consumer<ColorUtility>(
             builder: (context, colour, child) => Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -44,10 +38,14 @@ class Mixer extends StatelessWidget {
                     color: Color.fromRGBO(255, 255, 255, 1.0),
                     child: Column(
                       children: [
-                        mySlider(slidersList[0], redValue, context),
-                        mySlider(slidersList[1], greenValue, context),
-                        mySlider(slidersList[2], blueValue, context),
-                        mySlider(slidersList[3], opacityValue, context),
+                        mySlider(slidersList[0],
+                            colorUtility.backgroundColor.red, context),
+                        mySlider(slidersList[1],
+                            colorUtility.backgroundColor.green, context),
+                        mySlider(slidersList[2],
+                            colorUtility.backgroundColor.blue, context),
+                        mySlider(slidersList[3],
+                            colorUtility.backgroundColor.alpha, context),
                       ],
                     ),
                   ),
@@ -60,19 +58,22 @@ class Mixer extends StatelessWidget {
                     color: Color.fromRGBO(255, 255, 255, 1.0),
                     child: Column(
                       children: [
-                        mixDisplay("RED:", redValue.toString()),
-                        mixDisplay("GREEN:", greenValue.toString()),
-                        mixDisplay("BLUE:", blueValue.toString()),
+                        mixDisplay("RED:",
+                            colorUtility.backgroundColor.red.toString()),
+                        mixDisplay("GREEN:",
+                            colorUtility.backgroundColor.green.toString()),
+                        mixDisplay("BLUE:",
+                            colorUtility.backgroundColor.blue.toString()),
                         mixDisplay("OPACITY:",
-                            "${(opacityValue == 0 ? 0 : opacityValue / 255 * 100).round().toString()}%"),
+                            "${(colorUtility.backgroundColor.alpha == 0 ? 0 : colorUtility.backgroundColor.alpha / 255 * 100).round().toString()}%"),
                       ],
                     ),
                   ),
                 ),
                 myButton(
-                    redVal: redValue,
-                    blueVal: blueValue,
-                    greenVal: greenValue,
+                    redVal: colorUtility.backgroundColor.red,
+                    greenVal: colorUtility.backgroundColor.green,
+                    blueVal: colorUtility.backgroundColor.blue,
                     buttonText: "Go To Proof",
                     context: context,
                     routeName: Proof.routeName),

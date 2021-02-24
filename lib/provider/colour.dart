@@ -8,37 +8,61 @@ import 'package:flutter/material.dart';
 //   opacityValue,
 // }
 
-class Colour with ChangeNotifier {
-  int _redValue = 125;
-  int _greenValue = 125;
-  int _blueValue = 125;
-  int _opacityValue = 255;
+class ColorUtility with ChangeNotifier {
+  Color backgroundColor = Color.fromARGB(255, 0, 0, 0);
 
-  int get redValue => _redValue;
-
-  int get greenValue => _greenValue;
-
-  int get blueValue => _blueValue;
-
-  int get opacityValue => _opacityValue;
-
-  set newOpacityValue(int newOpacity) {
-    _opacityValue = newOpacity;
-    notifyListeners();
+  Color getBackgroundColor() {
+    return backgroundColor;
   }
 
-  set newRedValue(int newRed) {
-    _redValue = newRed;
-    notifyListeners();
+  void setBackgroundColor({String channel, int value}) {
+    switch (channel) {
+      case "opacity":
+        backgroundColor = backgroundColor.withAlpha(value);
+        break;
+      case "red":
+        backgroundColor = backgroundColor.withRed(value);
+        break;
+      case "green":
+        backgroundColor = backgroundColor.withGreen(value);
+        break;
+      case "blue":
+        backgroundColor = backgroundColor.withBlue(value);
+        break;
+        notifyListeners();
+    }
   }
 
-  set newGreenValue(int newGreen) {
-    _greenValue = newGreen;
-    notifyListeners();
-  }
+  // int _redValue = 125;
+  // int _greenValue = 125;
+  // int _blueValue = 125;
+  // int _opacityValue = 255;
 
-  set newBlueValue(int newBlue) {
-    _blueValue = newBlue;
-    notifyListeners();
-  }
+  // int get redValue => _redValue;
+
+  // int get greenValue => _greenValue;
+
+  // int get blueValue => _blueValue;
+
+  // int get opacityValue => _opacityValue;
+
+  // set newOpacityValue(int newOpacity) {
+  //   _opacityValue = newOpacity;
+  //   notifyListeners();
+  // }
+
+  // set newRedValue(int newRed) {
+  //   _redValue = newRed;
+  //   notifyListeners();
+  // }
+
+  // set newGreenValue(int newGreen) {
+  //   _greenValue = newGreen;
+  //   notifyListeners();
+  // }
+
+  // set newBlueValue(int newBlue) {
+  //   _blueValue = newBlue;
+  //   notifyListeners();
+  // }
 }

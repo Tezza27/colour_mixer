@@ -9,36 +9,35 @@ class Proof extends StatelessWidget {
   static const String routeName = '/proof';
   @override
   Widget build(BuildContext context) {
-    final colour = Provider.of<Colour>(context);
-    int redValue = colour.redValue;
-    int greenValue = colour.greenValue;
-    int blueValue = colour.blueValue;
-    int opacityValue = colour.opacityValue;
-    Color backgroundColour =
-        Color.fromARGB(opacityValue, redValue, greenValue, blueValue);
+    final colorUtility = Provider.of<ColorUtility>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Proving The Concept..."),
       ),
       body: Container(
-        color: backgroundColour,
+        color: colorUtility.getBackgroundColor(),
         width: double.infinity,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            proofDisplay(cardColor: Colors.red, textValue: "RED: $redValue"),
             proofDisplay(
-                cardColor: Colors.green, textValue: "GREEN: $greenValue"),
-            proofDisplay(cardColor: Colors.blue, textValue: "BLUE: $blueValue"),
+                cardColor: Colors.red,
+                textValue: "RED: $colorUtility.backgroundColor.red"),
+            proofDisplay(
+                cardColor: Colors.green,
+                textValue: "GREEN: $colorUtility.backgroundColor.green"),
+            proofDisplay(
+                cardColor: Colors.blue,
+                textValue: "BLUE: $colorUtility.backgroundColor.blue"),
             proofDisplay(
                 cardColor: Colors.white,
                 textValue:
-                    "OPACITY: ${(opacityValue == 0 ? 0 : opacityValue / 255 * 100).round()}%"),
+                    "OPACITY: ${(colorUtility.backgroundColor.alpha == 0 ? 0 : colorUtility.backgroundColor.alpha / 255 * 100).round().toString()}%"),
             myButton(
-                redVal: redValue,
-                blueVal: blueValue,
-                greenVal: greenValue,
+                redVal: colorUtility.backgroundColor.red,
+                greenVal: colorUtility.backgroundColor.green,
+                blueVal: colorUtility.backgroundColor.blue,
                 buttonText: "Go To Mixer",
                 context: context,
                 routeName: Mixer.routeName),
