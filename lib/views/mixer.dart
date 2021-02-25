@@ -47,7 +47,7 @@ class Mixer extends StatelessWidget {
                         mySlider(slidersList[0], redValue, context),
                         mySlider(slidersList[1], greenValue, context),
                         mySlider(slidersList[2], blueValue, context),
-                        mySlider(slidersList[3], opacityValue, context),
+                        mySlider(slidersList[3], opacityValue.toInt(), context),
                       ],
                     ),
                   ),

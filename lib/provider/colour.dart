@@ -1,13 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-// enum colourElements {
-//   redValue,
-//   greenValue,
-//   blueValue,
-//   opacityValue,
-// }
-
 class Colour with ChangeNotifier {
   int _redValue = 125;
   int _greenValue = 125;
@@ -22,11 +15,6 @@ class Colour with ChangeNotifier {
 
   int get opacityValue => _opacityValue;
 
-  set newOpacityValue(int newOpacity) {
-    _opacityValue = newOpacity;
-    notifyListeners();
-  }
-
   set newRedValue(int newRed) {
     _redValue = newRed;
     notifyListeners();
@@ -39,6 +27,11 @@ class Colour with ChangeNotifier {
 
   set newBlueValue(int newBlue) {
     _blueValue = newBlue;
+    notifyListeners();
+  }
+
+  set newOpacityValue(int newOpacity) {
+    _opacityValue = newOpacity;
     notifyListeners();
   }
 }
